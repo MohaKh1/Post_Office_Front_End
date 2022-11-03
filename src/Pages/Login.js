@@ -1,15 +1,16 @@
-import React,{useState} from "react";
-
+import React from "react";
+import {
+  Route,
+  Routes,
+  Link,
+} from "react-router-dom";
+import Home from "../Pages/Home"
+import SignUp from "../Components/SignUp"
 const Login = () => {
-    const [errMsg,setErrMsg] = useState({});
-    const [isSubmit,setIsSubmit] = useState({});
-    
-    const renderErrMsg=(name)=> name === errMsg.name && (
-        <div className="error">{errMsg.message}</div>
-        
-    );
+
     return ( 
-        <div class="bg-gray-400 h-screen overflow-hidden flex items-center justify-center">
+        <div>
+          <div class="bg-gray-400 h-screen overflow-hidden flex items-center justify-center">
         <div class="bg-white lg:w-5/12 md:6/12 w-10/12 shadow-3xl">
             <div class="text-center  font-medium p-2 md:p-4 text-black">
                 Post Office
@@ -29,9 +30,22 @@ const Login = () => {
             </div>
             <button class="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full">Login</button>
           </form>
-          <a class="text-center block font-medium p-2 md:p-4 text-black hover:underline" href="#">Need an account?</a>
+          <Link to="/SignUp"class="text-center block font-medium p-2 md:p-4 text-black hover:underline">Need an account?</Link>
         </div>
+          </div>
+        <div>
+       
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/SignUp" element={<SignUp />} />
+              <Route path="/Home" element={<Home />} />
+            </Routes>
+    </div>
+    
        </div>
+       
+
+
      );
 }
  
