@@ -1,16 +1,16 @@
 import React from 'react';
 import './App.css';
 import {
-  BrowserRouter as Router,
+  BrowserRouter
 } from "react-router-dom";
 
 import Login from './Pages/Login';
 function App() {
   return (
     <div className="App">
-      <Router>
+      <BrowserRouter>
         <Login/>
-      </Router>
+      </BrowserRouter>
     </div>
   );
 }
