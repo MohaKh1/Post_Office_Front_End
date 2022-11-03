@@ -1,16 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import logo from '../static/img/rig.png';
-
-import Home from '../pages/Home';
-import Prediction from '../pages/Prediction';
-import About from '../pages/About';
+import Home from '../Pages/Home';
 
 import {
-  BrowserRouter,
   Routes,
-  Route,
+  Route
 } from "react-router-dom";
 
 const Navbar= () =>{
