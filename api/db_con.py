@@ -29,7 +29,7 @@ def create_connection():
         logging.warning(e)
         logging.info('connection to db failed')
         print(e)
-        exit(1)
+        return False
     else:
         print(f'successfully connected to {str(config("dbname"))}')
         return cnxn
@@ -44,11 +44,3 @@ def destroy_connection(CONNECTION):
         logging.warning(e)
         print(e)
     
-
-con = create_connection()
-cursor = con.cursor()
-
-destroy_connection(con)
-# Some other example server values are
-# server = 'localhost\sqlexpress' # for a named instance
-# server = 'myserver,port' # to specify an alternate port
