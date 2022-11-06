@@ -3,8 +3,7 @@ from decouple import config
 import logging
 from datetime import datetime
 
-now = datetime.now()
-# logname = 'api/local_logs/db_con_'+str(now).replace(' ', '_')+'.Log'
+# logname = 'api/local_logs/db_con_'+str(datetime.now()).replace(' ', '_')+'.Log'
 # f = open(logname, "x")
 # logging.basicConfig(filename=logname,
 #                     filemode='a',
