@@ -19,8 +19,8 @@ const Navbar= () =>{
         <div class="flex items-center">
           <div class="flex-shrink-0">
             <a href='#'>
-            <Link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                A
+            <Link to="/home" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Home
             </Link>
 
             </a>

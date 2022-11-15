@@ -1,11 +1,8 @@
 import React from "react";
 import {
-  Route,
-  Routes,
   Link,
 } from "react-router-dom";
-import Home from "../Pages/Home"
-import SignUp from "../Components/SignUp"
+
 const Login = () => {
 
     return ( 
@@ -34,12 +31,6 @@ const Login = () => {
         </div>
           </div>
         <div>
-       
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/SignUp" element={<SignUp />} />
-              <Route path="/Home" element={<Home />} />
-            </Routes>
     </div>
     
        </div>
