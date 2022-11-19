@@ -1,17 +1,17 @@
 import React from "react";
-import {
-  Link,
-} from "react-router-dom";
+import {Link} from "react-router-dom";
+import axios from "axios";
+import {useState, useEffect, useRef} from "react";
 
 const Login = () => {
 
     return ( 
         <div>
           <div class="bg-gray-400 h-screen overflow-hidden flex items-center justify-center">
-        <div class="bg-white lg:w-5/12 md:6/12 w-10/12 shadow-3xl">
-            <div class="text-center  font-medium p-2 md:p-4 text-black">
+            <div class="bg-white lg:w-5/12 md:6/12 w-10/12 shadow-3xl">
+              <div class="text-center  font-medium p-2 md:p-4 text-black">
                 Post Office
-            </div>
+              </div>
           <form class="p-12 md:p-24">
             <div class="flex items-center text-lg mb-6 md:mb-8">
               <svg class="absolute ml-3" width="24" viewBox="0 0 24 24">
@@ -25,15 +25,13 @@ const Login = () => {
               </svg>
               <input type="password" id="password" class="bg-gray-200 pl-12 py-2 md:py-4 focus:outline-none w-full" placeholder="Password" />
             </div>
+
             <button class="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full">Login</button>
           </form>
-          <Link to="/SignUp"class="text-center block font-medium p-2 md:p-4 text-black hover:underline">Need an account?</Link>
-        </div>
+              <Link to="/SignUp"class="text-center block font-medium p-2 md:p-4 text-black hover:underline">Need an account?</Link>
+            </div>
           </div>
-        <div>
-    </div>
-    
-       </div>
+        </div>
        
 
 

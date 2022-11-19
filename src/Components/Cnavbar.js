@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import Home from '../Pages/Home';
 
 import {
   Routes,
   Route
 } from "react-router-dom";
 
-const Navbar= () =>{
+const Cnavbar= () =>{
   return (
   <div>
     
@@ -19,7 +18,7 @@ const Navbar= () =>{
         <div class="flex items-center">
           <div class="flex-shrink-0">
             <a href='#'>
-            <Link to="/home" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            <Link to="/employee_home" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Home
             </Link>
 
@@ -94,7 +93,7 @@ const Navbar= () =>{
 
   );
 }
-export default Navbar;
+export default Cnavbar;
 
 
 
