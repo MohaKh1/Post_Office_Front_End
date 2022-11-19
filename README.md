@@ -32,7 +32,13 @@ Now you can use postman or your application to test the api endpoints.
 
 ### Current endpoints
 
-sign in auth: app.route("/sign_in", methods=["POST"]) ---- posting data json format {'data': {'username': <username>, 'password': <password>}}
+[https://www.educba.com/flask-post-request/#:~:text=Syntax%20of%20Flask%20POST%20request%201%201.%20Configure,key%3A%20...%204%204.%20Retrieve%20parameter%20from%20JSON.](Making Api Requests with Postman)
+
+```api/json_schemas.py``` to see json formats, but you must put your json similar to this. -> ex: {"data" : {"username": "<username>", "password": "<password>"}}
+```api/json_responses.py``` to see json responses.
+
+-- sign in auth: app.route("/sign_in", methods=["POST"])
+-- customer sign up: @app.route("/sign_up", methods=["POST"])
 
 ## Available Scripts
 
