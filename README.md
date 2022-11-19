@@ -13,6 +13,27 @@ git checkout -t origin/development
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Running backend server
+To run the backend server, first you must move to the backend directory
+
+```cd api```
+
+Then install flask (optionally use a [venv](https://www.tutorialspoint.com/how-to-create-a-virtual-environment-in-python) to contain packages to this project)
+
+ ```pip install flask```
+ 
+ Then we need to [install the driver](https://learn.microsoft.com/en-us/sql/connect/python/pyodbc/step-1-configure-development-environment-for-pyodbc-python-development?source=recommendations&view=sql-server-ver16) for the database connector
+ 
+ Then once you have installed the db connector make sure you are in the right directory and run
+ 
+ ```FLASK_DEBUG=1 flask run```
+
+Now you can use postman or your application to test the api endpoints.
+
+### Current endpoints
+
+sign in auth: app.route("/sign_in", methods=["POST"]) ---- posting data json format {'data': {'username': <username>, 'password': <password>}}
+
 ## Available Scripts
 
 In the project directory, you can run:
