@@ -25,3 +25,5 @@ yarn-error.log*
 # manual
 .env
 .vscode
+# packages
+*.pyc
