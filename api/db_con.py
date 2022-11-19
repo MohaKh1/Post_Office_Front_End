@@ -1,7 +1,8 @@
-import pyodbc 
-from decouple import config
 import logging
 from datetime import datetime
+
+import pyodbc
+from decouple import config
 
 # logname = 'api/local_logs/db_con_'+str(datetime.now()).replace(' ', '_')+'.Log'
 # f = open(logname, "x")
@@ -16,7 +17,7 @@ from datetime import datetime
 def create_connection():
     try:
         # connect to Database using python connection string
-        server = 'tcp:'+str(config('host')) 
+        server = 'tcp:'+str(config('host'))   # type: ignore
         database = str(config('dbname'))
         username = str(config('user'))
         password = str(config('password'))
@@ -35,6 +36,7 @@ def create_connection():
 
 
 def destroy_connection(CONNECTION):
+    print("attempting close")
     try:
         CONNECTION.close()
         logging.info('successfully closed db connection')
