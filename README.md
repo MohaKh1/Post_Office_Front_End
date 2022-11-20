@@ -37,8 +37,12 @@ Now you can use postman or your application to test the api endpoints.
 ```api/json_schemas.py``` to see json formats, but you must put your json similar to this. -> ex: {"data" : {"username": "<username>", "password": "<password>"}}
 ```api/json_responses.py``` to see json responses.
 
--- sign in auth: app.route("/sign_in", methods=["POST"])
+-- sign in auth: app.route("/sign_in", methods=["GET"])
+
 -- customer sign up: @app.route("/sign_up", methods=["POST"])
+
+-- employee sign up: @app.route("/emp_sign_up", methods=["POST"])
+
 
 ## Available Scripts
 
