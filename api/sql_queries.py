@@ -32,7 +32,6 @@ SQL_CUSTOMER_SIGNUP = """INSERT INTO [dbo].[Customer]
 
 SQL_EMPLOYEE_SIGNUP = """INSERT INTO [dbo].[Employee]
            ([Employee_Type]
-           ,[SuperVisorID]
            ,[Username]
            ,[Password]
            ,[Phone_Number]
@@ -41,7 +40,7 @@ SQL_EMPLOYEE_SIGNUP = """INSERT INTO [dbo].[Employee]
            ,[Last_Name]
            ,[Sex]
            ,[Employee_Address])
-     VALUES (?,?,?,?,?,?,?,?,?,?)"""
+     VALUES (?,?,?,?,?,?,?,?,?)"""
 
 # retreive the last inserted primary key
 # used for records that have an auto primary key, in order to return a full record in api endpoints
@@ -50,5 +49,5 @@ ORDER BY {columnname} DESC"""
 
 SQL_GET_BY_USERNAME = """SELECT * FROM {tablename} WHERE Username='{Username}'"""
 
-SQL_GET_SUPERVISOR_ID = """SELECT TOP 1 EmployeeID FROM dbo.Employee WHERE Employee_Type = 1
+SQL_GET_SUPERVISOR_ID = """SELECT TOP 1 EmployeeID FROM dbo.Employee WHERE Employee_Type = 1 ORDER BY RAND()
 """

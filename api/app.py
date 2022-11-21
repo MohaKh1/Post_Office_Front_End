@@ -222,7 +222,7 @@ def employee_sign_up():
     # get data
     try:
     # getting and verifying proper data format
-        input_json = request.get_json(force=True)
+        input_json = request.get_json()
 
         if input_json == None: # no data recieved
              return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error="no data recieved response")
@@ -283,11 +283,9 @@ def employee_sign_up():
 
             # now that we have pulled the primary key lets link it to the employee entity during creation
             
-            # Lets pull the supervisorID
-            supervisor_id = cursor.execute(sql_queries.SQL_GET_SUPERVISOR_ID).fetchall()[0][0]
 
             employee_type = 0  # basic employee
-            request_employee_attributes_list = [employee_type,supervisor_id,create_employee_json.get('Username'),create_employee_json.get('Password'), create_employee_json.get('Phone_Number'),create_employee_json.get('Email'), create_employee_json.get('First_Name'), create_employee_json.get('Last_Name'),create_employee_json.get('Sex'),dict(employee_address_db_record_query_results).get('Address_ID')]
+            request_employee_attributes_list = [employee_type,create_employee_json.get('Username'),create_employee_json.get('Password'), create_employee_json.get('Phone_Number'),create_employee_json.get('Email'), create_employee_json.get('First_Name'), create_employee_json.get('Last_Name'),create_employee_json.get('Sex'),dict(employee_address_db_record_query_results).get('Address_ID')]
             request_employee_attributes_tuple = tuple(request_employee_attributes_list)
             # get the sql query
             employee_query = sql_queries.SQL_EMPLOYEE_SIGNUP
@@ -300,7 +298,6 @@ def employee_sign_up():
                 employee_db_record_query = sql_queries.SQL_LAST_INSERTED_PK.format(tablename='dbo.Employee',columnname="EmployeeID")
                 cursor.execute(employee_db_record_query)
                 employee_db_record_query_results = cursor.fetchall()
-                print(employee_db_record_query_results)
             except Exception as error:
                 db_con.destroy_connection(con) # remember to close the connection even if the execution doesnt work
                 return jsn_resp.employee_sign_up_response(403, "problem with employee record insertion and selection",raw_error=str(error))
@@ -312,7 +309,7 @@ def employee_sign_up():
         except Exception as e:
             return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error=str(e))
     except Exception as e:
-            return jsn_resp.employee_sign_up_response(403,"api base catch all error", raw_error=str(e))
+        return jsn_resp.employee_sign_up_response(403,"api base catch all error", raw_error=str(e))
 
 
 
