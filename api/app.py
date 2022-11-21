@@ -6,6 +6,7 @@ import json_schemas
 import sql_queries
 import json_responses as jsn_resp
 import datetime
+import preprocessing
 app = Flask(__name__)
 
 #__functions__________________________________________________________________________________
@@ -131,16 +132,16 @@ def sign_up_post():
 
         # We are checking if user_input json has the correct keys by cross checking against schema. 
         if type(create_customer_full_json) != type({"data": "data"}):
-             return jsn_resp.customer_sign_up_response(403,"data format not right", raw_error="no keys provided, please follow " + json.dumps({"data":json_schemas.customer_sign_up_json_resp}))
+             return jsn_resp.customer_sign_up_response(403,"data format not right", raw_error="no keys provided, please follow " + json.dumps({"data":json_schemas.customer_sign_up_json}))
         
         try:
             create_customer_json = create_customer_full_json.get('customer', None)
             create_customer_address_json = create_customer_full_json.get('address', None)
         except:
-            return jsn_resp.customer_sign_up_response(403,"data format not right", raw_error=json.dumps({'keys not like':{"data":json_schemas.customer_sign_up_json_resp}}))
+            return jsn_resp.customer_sign_up_response(403,"data format not right", raw_error=json.dumps({'keys not like':{"data":json_schemas.customer_sign_up_json}}))
 
-        if json_schemas.customer_sign_up_json_resp.keys() != create_customer_full_json.keys() or create_customer_address_json.keys() != json_schemas.customer_sign_up_json_resp['address'].keys()  or create_customer_json.keys() != json_schemas.customer_sign_up_json_resp['customer'].keys():
-            return jsn_resp.customer_sign_up_response(403,"data format not right", raw_error=json.dumps({'keys not like':{"data":json_schemas.customer_sign_up_json_resp}}))
+        if json_schemas.customer_sign_up_json.keys() != create_customer_full_json.keys() or create_customer_address_json.keys() != json_schemas.customer_sign_up_json['address'].keys()  or create_customer_json.keys() != json_schemas.customer_sign_up_json['customer'].keys():
+            return jsn_resp.customer_sign_up_response(403,"data format not right", raw_error=json.dumps({'keys not like':{"data":json_schemas.customer_sign_up_json}}))
             
         # verified data flows below.
         # INSERT TO DB
@@ -231,16 +232,16 @@ def employee_sign_up():
 
         # We are checking if user_input json has the correct keys by cross checking against schema. 
         if type(create_employee_full_json) != type({"data": "data"}):
-             return jsn_resp.employee_sign_up_response(403,"data format not right, use this", raw_error={"data":json_schemas.employee_sign_up_json_resp})
+             return jsn_resp.employee_sign_up_response(403,"data format not right, use this", raw_error={"data":json_schemas.employee_sign_up_json})
         
         try:
             create_employee_json = create_employee_full_json.get('employee', None)
             create_employee_address_json = create_employee_full_json.get('address', None)
         except:
-            return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error={'keys not like':{"data":json_schemas.employee_sign_up_json_resp}})
+            return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error={'keys not like':{"data":json_schemas.employee_sign_up_json}})
 
-        if json_schemas.employee_sign_up_json_resp.keys() != create_employee_full_json.keys() or create_employee_address_json.keys() != json_schemas.employee_sign_up_json_resp['address'].keys()  or create_employee_json.keys() != json_schemas.employee_sign_up_json_resp['employee'].keys():
-            return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error={'keys not like':{"data":json_schemas.employee_sign_up_json_resp}})
+        if json_schemas.employee_sign_up_json.keys() != create_employee_full_json.keys() or create_employee_address_json.keys() != json_schemas.employee_sign_up_json['address'].keys()  or create_employee_json.keys() != json_schemas.employee_sign_up_json['employee'].keys():
+            return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error={'keys not like':{"data":json_schemas.employee_sign_up_json}})
             
         # verified data flows below.
         # INSERT TO DB
@@ -313,4 +314,51 @@ def employee_sign_up():
 
 
 
-    
+
+@app.route("/create_package", methods=["POST"])
+def create_package():
+    try:
+    # getting and verifying proper data format
+        input_json = request.get_json()
+
+        if input_json == None: # no data recieved
+             return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error="no data recieved response")
+        
+        create_mail_full_json = input_json.get('data', None)
+
+        # We are checking if user_input json has the correct keys by cross checking against schema. 
+        if type(create_mail_full_json) != type({"data": "data"}):
+             return jsn_resp.employee_sign_up_response(403,"data format not right, use this", raw_error={"data":json_schemas.mail_json})
+        
+        try:
+            create_mail_json = create_mail_full_json.get('mail', None)
+        except:
+            return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error={'keys not like':{"data":json_schemas.mail_json}})
+
+        if json_schemas.mail_json.keys() != create_mail_full_json.keys() or create_mail_json.keys() != json_schemas.mail_json['mail'].keys():
+            return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error={'keys not like':{"data":json_schemas.mail_json}})
+            
+        # preprocessing
+        total_cost = preprocessing.calculate_mail_cost(int(create_mail_json.get('Mail_Type',0)),int(create_mail_json.get('Service_Type',0)),int(create_mail_json.get('Special_Care',0)))
+        create_mail_json['Total_Cost'] = total_cost
+        # verified data flows below.
+        # INSERT TO DB
+        # create database connection
+        
+        con = db_con.create_connection()
+
+        if con == False: # db con failed
+            return jsn_resp.employee_sign_up_response("400", "data recieved but connection to db failed")
+
+
+        else: # db con successfull open cursor
+            cursor = con.cursor()
+
+
+            db_con.destroy_connection(con)
+        try:
+            return jsonify(create_mail_json)
+        except Exception as e:
+            return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error=str(e))
+    except Exception as e:
+        return jsn_resp.employee_sign_up_response(403,"api base catch all error", raw_error=str(e))

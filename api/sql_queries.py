@@ -51,3 +51,5 @@ SQL_GET_BY_USERNAME = """SELECT * FROM {tablename} WHERE Username='{Username}'""
 
 SQL_GET_SUPERVISOR_ID = """SELECT TOP 1 EmployeeID FROM dbo.Employee WHERE Employee_Type = 1 ORDER BY RAND()
 """
+
+SQL_GET_CUSTOMER_ADDRESS = """SELECT Customer_Address FROM dbo.Customer WHERE Username='{Username}';"""

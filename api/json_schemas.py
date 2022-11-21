@@ -1,4 +1,4 @@
-employee_sign_up_json_resp= {
+employee_sign_up_json= {
     "employee": {
         "Username": "<username:str(20)>",
         "Password": "<password:str(20)>",
@@ -17,7 +17,7 @@ employee_sign_up_json_resp= {
 }
 
 
-customer_sign_up_json_resp = {
+customer_sign_up_json = {
     "customer":{
         "Username": "<username>",
         "Password": "<password>",
@@ -31,6 +31,17 @@ customer_sign_up_json_resp = {
         "City" : "<city>",
         "Zipcode" : "<Zipcode:str>",
         "State" : "<State:str(2)>"
+    }
+}
+
+
+mail_json = {
+    "mail":{
+        "RecieverUsername": "<Customer.Username:str",
+        "Special_Care": "int:0 or 1",
+        "Service_Type": "int: 0 or 1",
+        "Mail_Type": "int: 0 or 1",
+        "Mail_Start_Location" : "int: one of the post office ids",
     }
 }
 
