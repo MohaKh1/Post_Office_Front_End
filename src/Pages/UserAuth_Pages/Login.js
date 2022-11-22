@@ -1,11 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
-import {useState, useEffect, useRef} from "react";
+import {useState} from "react";
 
 const Login = () => {
 
     /* write to not send if empty */
+    const [userdata, setUserdata] = useState({
+      "data": "NONE"})
 
     const HandleSubmit = async e =>{
 
@@ -15,7 +17,7 @@ const Login = () => {
       const signInData = {"data":formData};
       
 
-      const res = await axios.request({
+      await axios.request({
         data:signInData,
         headers: {
           'Content-Type': 'application/json',
@@ -25,9 +27,15 @@ const Login = () => {
 
       })
       .then((response) => {
-        console.log(response.data);
-    })
+        setUserdata(response.data)
+        
+      }).catch((error) => {
+        if (error.response) {
+          alert(error.response)
+          }
+      })
     };
+    
 
     return ( 
         <div>
