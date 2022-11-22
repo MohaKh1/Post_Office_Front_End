@@ -7,7 +7,9 @@ import sql_queries
 import json_responses as jsn_resp
 import datetime
 import preprocessing
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 #__functions__________________________________________________________________________________
 
