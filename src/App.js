@@ -14,6 +14,7 @@ import Employee_customer_reports from './Pages/Employee_Pages/Employee_Customer_
 import Employee_processing from './Pages/Employee_Pages/Employee_Processing';
 import Manager_employee_report from './Pages/Manager_Pages/Manager_Employee_Report';
 import Manager_pages from './Pages/Manager_Pages/Manager_Empoyee_Entry';
+import Manager from './Pages/Manager_Pages/Manager';
 function App() {
   return (
     <div className="App">
