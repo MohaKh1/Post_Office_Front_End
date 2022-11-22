@@ -6,8 +6,9 @@ import json_schemas
 import sql_queries
 import json_responses as jsn_resp
 import datetime
-import preprocessing
 from flask_cors import CORS
+from datetime import datetime, timedelta, timezone
+from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, unset_jwt_cookies, jwt_required, JWTManager
 app = Flask(__name__)
 CORS(app)
 
@@ -39,7 +40,7 @@ def index():
 # 1. This api endpoint assumes there are no employees and customers with the same username and password. If this assumption is broken
 # the customer will be authorized, not the employee
 # 2. This api assumes all customer and employee usernames and passwords are unique. To safegaurd, only the first record will be returned
-@app.route("/sign_in", methods=["GET"]) # data points: username and password ADD EMAIL checking also
+@app.route("/sign_in", methods=["POST"]) # data points: username and password ADD EMAIL checking also
 def sign_in_post(): 
     try:
         # default values
@@ -56,7 +57,6 @@ def sign_in_post():
             # check format correct
             if user_login_json is None or 'username' not in user_login_json or 'password' not in user_login_json:
                 return jsn_resp.sign_in_auth_response("403", 'Data received but not proper format, please use {"data": {"username": <username>, "password": <password>}}',False, user_type=usert_type)
-        
 
         except Exception as e: # no input or data failed to recieve
 
