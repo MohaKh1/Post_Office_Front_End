@@ -13,7 +13,7 @@ import Customer_package_status from './Pages/Customer_Pages/Customer_Package_Sta
 import Employee_customer_reports from './Pages/Employee_Pages/Employee_Customer_Reports';
 import Employee_processing from './Pages/Employee_Pages/Employee_Processing';
 import Manager_employee_report from './Pages/Manager_Pages/Manager_Employee_Report';
-import Manager_employee_entry from './Pages/Manager_Pages/Manager_Empoyee_Entry';
+import Manager_employee_entry from './Pages/Manager_Pages/Manager_Employee_Entry';
 import Manager from './Pages/Manager_Pages/Manager';
 function App() {
   return (
