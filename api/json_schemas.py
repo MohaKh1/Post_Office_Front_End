@@ -18,20 +18,20 @@ employee_sign_up_json= {
 
 
 customer_sign_up_json = {
-    "customer":{
+
         "Username": "<username>",
         "Password": "<password>",
         "Email": "<email>",
         "Phone_Number" : "nospaces:str",
         "First_Name": "<first_name>",
         "Last_Name": "<Last_name>",
-        "Sex": "<Sex>"},
-    "address": {
+        "Sex": "<Sex>",
+ 
         "Street_Address": "<street_address:str(30)>",
         "City" : "<city>",
         "Zipcode" : "<Zipcode:str>",
         "State" : "<State:str(2)>"
-    }
+    
 }
 
 

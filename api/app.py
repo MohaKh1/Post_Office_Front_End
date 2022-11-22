@@ -125,7 +125,7 @@ def sign_up_post():
     # get data
     try:
     # getting and verifying proper data format
-        input_json = request.get_json(force=True)
+        input_json = request.get_json()
 
         if input_json == None: # no data recieved
              return jsn_resp.customer_sign_up_response(403,"data format not right", raw_error="no data recieved response")
@@ -136,15 +136,7 @@ def sign_up_post():
         if type(create_customer_full_json) != type({"data": "data"}):
              return jsn_resp.customer_sign_up_response(403,"data format not right", raw_error="no keys provided, please follow " + json.dumps({"data":json_schemas.customer_sign_up_json}))
         
-        try:
-            create_customer_json = create_customer_full_json.get('customer', None)
-            create_customer_address_json = create_customer_full_json.get('address', None)
-        except:
-            return jsn_resp.customer_sign_up_response(403,"data format not right", raw_error=json.dumps({'keys not like':{"data":json_schemas.customer_sign_up_json}}))
-
-        if json_schemas.customer_sign_up_json.keys() != create_customer_full_json.keys() or create_customer_address_json.keys() != json_schemas.customer_sign_up_json['address'].keys()  or create_customer_json.keys() != json_schemas.customer_sign_up_json['customer'].keys():
-            return jsn_resp.customer_sign_up_response(403,"data format not right", raw_error=json.dumps({'keys not like':{"data":json_schemas.customer_sign_up_json}}))
-            
+ 
         # verified data flows below.
         # INSERT TO DB
         # create database connection
@@ -161,7 +153,7 @@ def sign_up_post():
 
             # first we add the address
             # get the addresses into a tuple
-            request_address_list = [create_customer_address_json.get('Street_Address'), create_customer_address_json.get('City'),create_customer_address_json.get('Zipcode'),create_customer_address_json.get('State')]
+            request_address_list = [create_customer_full_json.get('Street_Address'), create_customer_full_json.get('City'),create_customer_full_json.get('Zipcode'),create_customer_full_json.get('State')]
             request_address_tuple = tuple(request_address_list)
             
             # get the sql query
@@ -186,7 +178,7 @@ def sign_up_post():
 
 
             # now that we have pulled the primary key lets link it to the customer entity during creation
-            request_customer_attributes_list = [create_customer_json.get('Username'),create_customer_json.get('Password'), create_customer_json.get('Phone_Number'),create_customer_json.get('Email'), create_customer_json.get('First_Name'), create_customer_json.get('Last_Name'),create_customer_json.get('Sex'),dict(customer_address_db_record_query_results).get('Address_ID')]
+            request_customer_attributes_list = [create_customer_full_json.get('Username'),create_customer_full_json.get('Password'), create_customer_full_json.get('Phone_Number'),create_customer_full_json.get('Email'), create_customer_full_json.get('First_Name'), create_customer_full_json.get('Last_Name'),create_customer_full_json.get('Sex'),dict(customer_address_db_record_query_results).get('Address_ID')]
             request_customer_attributes_tuple = tuple(request_customer_attributes_list)
             # get the sql query
             customer_query = sql_queries.SQL_CUSTOMER_SIGNUP
