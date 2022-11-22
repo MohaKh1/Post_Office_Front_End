@@ -18,7 +18,7 @@ const Mnavbar= () =>{
 
             
           </div>
-          <div class="hidden md:block">
+          <div class=" md:block">
             <div class="ml-5 flex items-baseline space-x-4">
               {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
                 <div>
