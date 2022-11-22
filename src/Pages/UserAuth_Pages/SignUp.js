@@ -19,7 +19,11 @@ const SignUp = () => {
     const [userCity, setUserCity] = useState('');
     const [userST, setUserST] = useState('');
     const [userHome, setUserHome] = useState('');
+    const [userZip, setuserZip] = useState('');
 
+
+    const [userdata, setUserdata] = useState({
+        "data": "NONE"})
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -51,25 +55,42 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const form = new FormData(e.target);
+        const formData = Object.fromEntries(form.entries());
+        const signUpData = {"data":formData};
+        console.log(signUpData)
 
         try {
-            const response = await axios.post(SIGNUP_URL,
-                JSON.stringify({ username, pwd }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
+            const response = await axios.request({
+                data:signUpData,
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                method: 'POST',
+                url:"http://127.0.0.1:5000/sign_up",
+
+            })
+            .then((response) => {
+                setUserdata(response.data)
+                console.log(response)
+                console.log(userdata)
+
+            }).catch((error) => {
+                if (error.response) {
+                alert(error.response)
                 }
-            );
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
-            setSuccess(true);
-            //clear state and controlled inputs
-            //need value attrib on inputs for this
-            setUsername('');
-            setPwd('');
-            setMatchPwd('');
+            })
+
+            // console.log(response?.data);
+            // console.log(JSON.stringify(response))
+            // setSuccess(true);
+            // //clear state and controlled inputs
+            // //need value attrib on inputs for this
+            // setUsername('');
+            // setPwd('');
+            // setMatchPwd('');
         } catch (err) {
+            console.log(err)
             if (!err?.response) {
                 setErrMsg('No Server Response');
             } else if (err.response?.status === 409) {
@@ -87,7 +108,7 @@ const SignUp = () => {
                 <section>
                     <h1>Success!</h1>
                     <p>
-                        <a href="#">Sign In</a>
+                        add redirect
                     </p>
                 </section>
             ) : (
@@ -109,6 +130,7 @@ const SignUp = () => {
                             <input
                                 type="text"
                                 id="firstname"
+                                name='First_Name'
                                 autoComplete = "off"
                                 ref={userRef}
                                 onChange={(e) => setUserFname(e.target.value)}
@@ -126,6 +148,7 @@ const SignUp = () => {
                             <input
                                 type="text"
                                 id="lastname"
+                                name="Last_Name"
                                 autoComplete = "off"
                                 ref={userRef}
                                 onChange={(e) => setUserLname(e.target.value)}
@@ -143,6 +166,7 @@ const SignUp = () => {
                             <input
                                 type="text"
                                 id="email"
+                                name="Email"
                                 autoComplete = "off"
                                 ref={userRef}
                                 onChange={(e) => setUserEmail(e.target.value)}
@@ -159,7 +183,8 @@ const SignUp = () => {
                         <div className="flex flex-col items-start">
                             <input
                                 type="text"
-                                id="email"
+                                id="pnum"
+                                name="Phone_Number"
                                 autoComplete = "off"
                                 ref={userRef}
                                 onChange={(e) => setUserPN(e.target.value)}
@@ -170,13 +195,25 @@ const SignUp = () => {
                                 className="block w-full mt-1 bg-gray-200 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             />
                         </div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 undefined">
+                        <label htmlFor="sex" className="block text-sm font-medium text-gray-700 undefined">
+                            Sex
+                        </label>
+                        <div className="flex flex-col items-start">
+                            <input
+                                type="text"
+                                id="sex"
+                                name="Sex"
+                                className="block w-full mt-1 bg-gray-200 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            />
+                        </div>
+                        <label htmlFor="City" className="block text-sm font-medium text-gray-700 undefined">
                             City
                         </label>
                         <div className="flex flex-col items-start">
                             <input
                                 type="text"
-                                id="email"
+                                id="City"
+                                name="City"
                                 autoComplete = "off"
                                 ref={userRef}
                                 onChange={(e) => setUserCity(e.target.value)}
@@ -187,13 +224,14 @@ const SignUp = () => {
                                 className="block w-full mt-1 bg-gray-200 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                             />
                         </div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 undefined">
+                        <label htmlFor="State" className="block text-sm font-medium text-gray-700 undefined">
                             State
                         </label>
                         <div className="flex flex-col items-start">
                             <input
                                 type="text"
-                                id="email"
+                                id="State"
+                                name="State"
                                 autoComplete = "off"
                                 ref={userRef}
                                 onChange={(e) => setUserST(e.target.value)}
@@ -212,9 +250,30 @@ const SignUp = () => {
                                 type="text"
                                 id="home"
                                 autoComplete = "off"
+                                name="Street_Address"
                                 ref={userRef}
                                 onChange={(e) => setUserHome(e.target.value)}
                                 value={userHome}
+                                required
+                                aria-invalid={validName ? "false" : "true"}
+                                aria-describedby="uidnote"
+                                onFocus={() => setUserFocus(true)}
+                                onBlur={() => setUserFocus(false)}
+                                className="block w-full mt-1 bg-gray-200 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                            />
+                        </div>
+                        <label htmlFor="zip" className="block text-sm font-medium text-gray-700 undefined">
+                            Zipcode
+                        </label>
+                        <div className="flex flex-col items-start">
+                            <input
+                                type="text"
+                                id="Zipcode"
+                                name="Zipcode"
+                                autoComplete = "off"
+                                ref={userRef}
+                                onChange={(e) => setuserZip(e.target.value)}
+                                value={userZip}
                                 required
                                 aria-invalid={validName ? "false" : "true"}
                                 aria-describedby="uidnote"
@@ -230,6 +289,7 @@ const SignUp = () => {
                         <input
                             type="text"
                             id="username"
+                            name="Username"
                             ref={userRef}
                             autoComplete="off"
                             onChange={(e) => setUsername(e.target.value)}
@@ -247,6 +307,7 @@ const SignUp = () => {
                         <input
                             type="password"
                             id="password"
+                            name="Password"
                             onChange={(e) => setPwd(e.target.value)}
                             value={pwd}
                             required
