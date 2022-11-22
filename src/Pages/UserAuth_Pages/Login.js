@@ -5,7 +5,6 @@ import {useState} from "react";
 import Customer_data from "../../Components/CustomerData";
 import Employee_data from "../../Components/EmployeeData";
 
-import Employee from "../Employee_Pages/Employee";
 const Login = () => {
 
     /* write to not send if empty */
