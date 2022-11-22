@@ -18,7 +18,7 @@ const Mnavbar= () =>{
         <div class="flex items-center">
           <div class="flex-shrink-0">
             <a href='#'>
-            <Link to="/employee_home" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            <Link to="/manager" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Home
             </Link>
 
@@ -28,12 +28,12 @@ const Mnavbar= () =>{
             <div class="ml-5 flex items-baseline space-x-4">
               {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
               
-                <Link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  B
+                <Link to="/manager_employee_report" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Employee Reports
                   </Link>
 
-                <Link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                C
+                <Link to="/manager_employee_entry" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Employee Entry
               </Link>
 
 
@@ -81,9 +81,6 @@ const Mnavbar= () =>{
     </div>
   </nav>
 
-  <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
 
   
 </div>

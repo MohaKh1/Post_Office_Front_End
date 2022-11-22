@@ -1,10 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import {
-  Routes,
-  Route
-} from "react-router-dom";
 
 const Enavbar= () =>{
   return (
@@ -17,7 +13,7 @@ const Enavbar= () =>{
         <div class="flex items-center">
           <div class="flex-shrink-0">
             <a href='#'>
-            <Link to="/employee_home" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            <Link to="/employee" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Home
             </Link>
 
@@ -27,12 +23,12 @@ const Enavbar= () =>{
             <div class="ml-5 flex items-baseline space-x-4">
               {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
               
-                <Link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  B
+                <Link to="/employee_customer_reports" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Customer Reports
                   </Link>
 
-                <Link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                C
+                <Link to="/employee_processing" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Package Processing
               </Link>
 
 
@@ -80,11 +76,6 @@ const Enavbar= () =>{
     </div>
   </nav>
 
-  <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
-
-  
 </div>
 
 

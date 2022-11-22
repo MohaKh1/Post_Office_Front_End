@@ -2,11 +2,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 
 
-import {
-  Routes,
-  Route
-} from "react-router-dom";
-
 const Cnavbar= () =>{
   return (
   <div>
@@ -18,7 +13,7 @@ const Cnavbar= () =>{
         <div class="flex items-center">
           <div class="flex-shrink-0">
             <a href='#'>
-            <Link to="/employee_home" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+            <Link to="/customer" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Home
             </Link>
 
@@ -28,15 +23,17 @@ const Cnavbar= () =>{
             <div class="ml-5 flex items-baseline space-x-4">
               {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
               
-                <Link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                  B
+                <Link to="/customer_profile" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  Profile
                   </Link>
 
-                <Link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
-                C
+                <Link to="/customer_package_entry" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Package Entry
               </Link>
 
-
+              <Link to="/customer_package_status" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                Package Status
+              </Link>
             
             </div>
           </div>
@@ -80,10 +77,6 @@ const Cnavbar= () =>{
      
     </div>
   </nav>
-
-  <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
 
   
 </div>
