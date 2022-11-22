@@ -3,7 +3,7 @@ import Mnavbar from "../../Components/Mnavbar";
 const Manager = () => {
     
     return ( 
-        <div className="Employee">
+        <div className="Manager">
        <Mnavbar/>
         </div>
      );

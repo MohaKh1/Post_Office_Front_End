@@ -164,9 +164,7 @@ const SignUp = () => {
                             </div>
                         </div>
                         <div className="flex items-center justify-end mt-4">
-                            <Link to="/login"
-                                className="text-sm text-gray-600 underline hover:text-gray-900"
-                            >
+                            <Link to="/login" className="text-sm text-gray-600 underline hover:text-gray-900">
                                 Already registered?
                             </Link>
                             <button
