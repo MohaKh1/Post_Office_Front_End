@@ -2,7 +2,10 @@ import React from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import {useState} from "react";
+import Customer_data from "../../Components/CustomerData";
+import Employee_data from "../../Components/EmployeeData";
 
+import Employee from "../Employee_Pages/Employee";
 const Login = () => {
 
     /* write to not send if empty */
@@ -38,16 +41,20 @@ const Login = () => {
       })
       if(userdata.user_type === 0){
         /*navigate to customer */
+        <Customer_data data="{userdata.data}"/>
         navigate("/customer");
       }else if(userdata.user_type === 1 && userdata.data.Employee_Type === 0){
         /* navigate to employee */
+        <Employee_data data="{userdata.data}"/>
         navigate("/employee");
       }else if(userdata.user_type === 1 && userdata.data.Employee_Type === 1){
         /* navigate to manager */
+        <Employee_data data="{userdata.data}"/>
         navigate("/manager");
       } else{
         
       }
+
   
     };
     
