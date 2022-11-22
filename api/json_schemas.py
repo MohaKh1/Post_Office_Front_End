@@ -37,6 +37,7 @@ customer_sign_up_json = {
 
 mail_json = {
     "mail":{
+        "SenderID" : "<CustomerID:int>",
         "RecieverUsername": "<Customer.Username:str",
         "Special_Care": "int:0 or 1",
         "Service_Type": "int: 0 or 1",

@@ -338,9 +338,9 @@ def create_package():
         if json_schemas.mail_json.keys() != create_mail_full_json.keys() or create_mail_json.keys() != json_schemas.mail_json['mail'].keys():
             return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error={'keys not like':{"data":json_schemas.mail_json}})
             
-        # preprocessing
-        total_cost = preprocessing.calculate_mail_cost(int(create_mail_json.get('Mail_Type',0)),int(create_mail_json.get('Service_Type',0)),int(create_mail_json.get('Special_Care',0)))
-        create_mail_json['Total_Cost'] = total_cost
+
+        
+
         # verified data flows below.
         # INSERT TO DB
         # create database connection
@@ -354,10 +354,87 @@ def create_package():
         else: # db con successfull open cursor
             cursor = con.cursor()
 
+            # getting destination address and reciever username
+            get_receiver_sql = sql_queries.SQL_GET_CUSTOMER_ADDRESS_and_ID
+            reciever_username = create_mail_json.get('RecieverUsername', None)
+            cursor.execute(get_receiver_sql.format(Username=reciever_username))
+            reciever_info_q_results = cursor.fetchall()[0]
+            reciever_id = reciever_info_q_results[1]
+            mail_destination_address_id = reciever_info_q_results[0]
+            try:
+                mail_insert_list = [create_mail_json.get('SenderID',10101), reciever_id, create_mail_json.get('Special_Care',0), create_mail_json.get('Service_Type',0), create_mail_json.get('Mail_Type'), create_mail_json.get('Mail_Start_Location', 1336),mail_destination_address_id]
+                mail_insert_tuple = tuple(mail_insert_list)
+                mail_insert_sql = sql_queries.SQL_CREATE_PACKAGE
+                cursor.execute(mail_insert_sql, mail_insert_tuple)
+                con.commit()
+
+
+                sql_get_inserted_package = sql_queries.SQL_LAST_INSERTED_PK
+                cursor.execute(sql_get_inserted_package.format(tablename="dbo.Mail", columnname="TrackingNumber"))
+                last_inserted_record = cursor.fetchall()[0]
+                last_inserted_mail_record = jsn_resp.create_package_response_json(last_inserted_record)
+
+                sql_get_package_address_info = sql_queries.SQL_WHERE_query_int
+                cursor.execute(sql_get_package_address_info.format(tablename='dbo.Address',columnname='Address_ID',filter=str(mail_destination_address_id)))
+                last_inserted_mail_record_destination_address = jsn_resp.address_resp(cursor.fetchall()[0])
+
+                sql_reciever_info_q = sql_queries.SQL_WHERE_query_str
+                cursor.execute(sql_reciever_info_q.format(tablename='dbo.Customer',columnname='CustomerID',filter=str(reciever_id)))
+                sql_reciever_info_q_results = jsn_resp.sign_up_customer_response(cursor.fetchall()[0])
+                sql_emp_proc_q = sql_queries.SQL_WHERE_query_int
+                cursor.execute(sql_emp_proc_q.format(tablename='dbo.Employee',columnname='EmployeeID',filter=last_inserted_mail_record.get("Processedby_ID", -1)))
+                sql_emp_proc_q_results = jsn_resp.sign_up_employee_response(cursor.fetchall()[0])
+                
+                
+
+
+            except Exception as error:
+                db_con.destroy_connection(con) # remember to close the connection even if the execution doesnt work
+                return jsn_resp.employee_sign_up_response(403, "problem with mail record insertion and selection",raw_error=str(error))
+
+
+
 
             db_con.destroy_connection(con)
         try:
-            return jsonify(create_mail_json)
+            return jsn_resp.create_package_response(200, "successfully added mail", data={"mail":last_inserted_mail_record, "mail_destination_address": last_inserted_mail_record_destination_address, "receiver_info": sql_reciever_info_q_results, "processed_emp_info": sql_emp_proc_q_results})
+        except Exception as e:
+            return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error=str(e))
+    except Exception as e:
+        return jsn_resp.employee_sign_up_response(403,"api base catch all error", raw_error=str(e))
+
+
+
+@app.route("/get_postoffice", methods=["GET"])
+def get_loc():
+    try:
+        con = db_con.create_connection()
+        if con == False: # db con failed
+                return jsn_resp.employee_sign_up_response("400", "data recieved but connection to db failed")
+        cursor = con.cursor()
+        sql_get_package_address_info = sql_queries.SQL_WHERE_query_int
+        ad_list = []
+        cursor.execute(sql_get_package_address_info.format(tablename='dbo.Address',columnname='Address_ID',filter=str(1336)))
+        ad_list.append(cursor.fetchall()[0])
+        cursor.execute(sql_get_package_address_info.format(tablename='dbo.Address',columnname='Address_ID',filter=str(1337)))
+        ad_list.append(cursor.fetchall()[0])
+
+        cursor.execute(sql_get_package_address_info.format(tablename='dbo.Address',columnname='Address_ID',filter=str(1338)))
+        ad_list.append(cursor.fetchall()[0])
+
+        cursor.execute(sql_get_package_address_info.format(tablename='dbo.Address',columnname='Address_ID',filter=str(1339)))
+        ad_list.append(cursor.fetchall()[0])
+
+        address_final = []
+        for address in ad_list:
+            address_final.append(jsn_resp.address_resp(address))
+
+
+
+        
+        
+        try:
+            return jsn_resp.create_package_response(200, "successfully queried", data={"locations": address_final})
         except Exception as e:
             return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error=str(e))
     except Exception as e:

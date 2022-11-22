@@ -42,6 +42,16 @@ SQL_EMPLOYEE_SIGNUP = """INSERT INTO [dbo].[Employee]
            ,[Employee_Address])
      VALUES (?,?,?,?,?,?,?,?,?)"""
 
+SQL_CREATE_PACKAGE = """INSERT INTO [dbo].[Mail]
+           ([SenderID]
+           ,[ReceiverID]
+           ,[Special_Care]
+           ,[Service_Type]
+           ,[Mail_Type]
+           ,[Mail_Start_Location]
+           ,[Mail_Address])
+     VALUES (?,?,?,?,?,?,?)"""
+
 # retreive the last inserted primary key
 # used for records that have an auto primary key, in order to return a full record in api endpoints
 SQL_LAST_INSERTED_PK = """SELECT TOP 1 * FROM {tablename}  
@@ -51,5 +61,14 @@ SQL_GET_BY_USERNAME = """SELECT * FROM {tablename} WHERE Username='{Username}'""
 
 SQL_GET_SUPERVISOR_ID = """SELECT TOP 1 EmployeeID FROM dbo.Employee WHERE Employee_Type = 1 ORDER BY RAND()
 """
+SQL_GET_POSTOFFICE_ADDRESS_IDS = """(SELECT floor(RAND()*4) + 1336)"""
+SQL_GET_CUSTOMER_ADDRESS_and_ID = """SELECT Customer_Address,CustomerID FROM dbo.Customer WHERE Username='{Username}';"""
 
-SQL_GET_CUSTOMER_ADDRESS = """SELECT Customer_Address FROM dbo.Customer WHERE Username='{Username}';"""
+SQL_WHERE_query_int = """SELECT * FROM {tablename}  
+WHERE {columnname}={filter}"""
+
+
+SQL_WHERE_query_str = """SELECT * FROM {tablename}  
+WHERE {columnname}='{filter}'"""
+
+SQL_POST_OFFICE_LOC = """SELECT * FROM [dbo].[Address] WHERE Address_ID = {number};"""
