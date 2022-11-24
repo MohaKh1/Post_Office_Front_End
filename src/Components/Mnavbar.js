@@ -1,40 +1,36 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-
-import {
-  Routes,
-  Route
-} from "react-router-dom";
-
 const Mnavbar= () =>{
   return (
   <div>
     
     <div class="min-h-full">
-  <nav class="bg-slate-800" id='navbar'>
+  <nav class="bg-slate-800" id='Mnavbar'>
     <div class="mx-auto w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <a href='#'>
+            
             <Link to="/manager" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Home
             </Link>
 
-            </a>
+            
           </div>
-          <div class="hidden md:block">
+          <div class=" md:block">
             <div class="ml-5 flex items-baseline space-x-4">
               {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-              
+                <div>
                 <Link to="/manager_employee_report" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Employee Reports
                   </Link>
-
-                <Link to="/manager_employee_entry" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                  </div>
+                  <div>
+                <Link t="/manager_employee_entry" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Employee Entry
               </Link>
+              </div>
 
 
             

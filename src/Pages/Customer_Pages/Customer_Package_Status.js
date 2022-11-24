@@ -1,4 +1,4 @@
-const Customer_package_status = () => {
+const Customer_package_status = (props) => {
     return ( 
     <div>
 

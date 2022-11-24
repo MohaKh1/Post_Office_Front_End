@@ -1,3 +1,12 @@
+
+const Manager_employee_entry = () => {
+    return ( <div>
+
+    </div> );
+}
+ 
+export default Manager_employee_entry;
+=======
 import React from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
@@ -339,3 +348,4 @@ const Manager_pages = () => {
     )
 }
 export default Manager_pages;
+

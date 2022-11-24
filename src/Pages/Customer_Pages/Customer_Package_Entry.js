@@ -1,4 +1,4 @@
-const Customer_package_entry = () => {
+const Customer_package_entry = (props) => {
     return ( <div>
         <p>hi</p>
     </div> );
