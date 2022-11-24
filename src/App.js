@@ -13,8 +13,13 @@ import Customer_package_status from './Pages/Customer_Pages/Customer_Package_Sta
 import Employee_customer_reports from './Pages/Employee_Pages/Employee_Customer_Reports';
 import Employee_processing from './Pages/Employee_Pages/Employee_Processing';
 import Manager_employee_report from './Pages/Manager_Pages/Manager_Employee_Report';
+<<<<<<< HEAD
 import Manager_employee_entry from './Pages/Manager_Pages/Manager_Empoyee_Entry';
+=======
+import Manager_pages from './Pages/Manager_Pages/Manager_Employee_Entry';
+>>>>>>> master
 import Manager from './Pages/Manager_Pages/Manager';
+import Manager_Employee_Entry from './Pages/Manager_Pages/Manager_Employee_Entry'
 function App() {
   return (
     <div className="App">
@@ -30,8 +35,13 @@ function App() {
           <Route path="employee_customer_reports" element={<Employee_customer_reports/>}/>
           <Route path="employee_processing" element={<Employee_processing/>}/>
         <Route path="Manager" element={<Manager/>}/>
+<<<<<<< HEAD
           <Route path ="Manager_employee_report" element={<Manager_employee_report/>}/>
           <Route path ="Manager_employee_entry" element={<Manager_employee_entry/>}/>
+=======
+          <Route path ="Manager_employee_entry" element={<Manager_Employee_Entry/>}/>
+          <Route path ="Manager_pages" element={<Manager_pages/>}/>
+>>>>>>> master
           
           
       </Routes>

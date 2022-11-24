@@ -3,9 +3,8 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import {useState, useEffect, useRef} from "react";
 
-
-const SIGNUP_URL = '/signup';
-const SignUp = () => {
+// Change variable names. or make sign up a function component
+const Manager_pages = () => {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -72,23 +71,17 @@ const SignUp = () => {
             })
             .then((response) => {
                 setUserdata(response.data)
-                console.log(response)
-                console.log(userdata)
+                console.log(userdata.data)
+                if (userdata.status_code === 200) {
+                    setSuccess(true);
+                }
 
             }).catch((error) => {
                 if (error.response) {
                 alert(error.response)
                 }
             })
-
-            // console.log(response?.data);
-            // console.log(JSON.stringify(response))
-            // setSuccess(true);
-            // //clear state and controlled inputs
-            // //need value attrib on inputs for this
-            // setUsername('');
-            // setPwd('');
-            // setMatchPwd('');
+            
         } catch (err) {
             console.log(err)
             if (!err?.response) {
@@ -329,19 +322,14 @@ const SignUp = () => {
                         onBlur={() => setMatchFocus(false)}
                         className="block w-full mt-1 bg-gray-200 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     />
-                    <div className="flex items-center justify-end mt-4">
-                        <Link to="/login" className="text-sm text-gray-600 underline hover:text-gray-900">
-                            Already registered?
-                        </Link>
+
                         <button
                             disabled={!validMatch ? true : false}
                             type="submit"
                             className="inline-flex items-center px-4 py-2 ml-4 text-xs font-semibold tracking-widest text-white uppercase transition duration-150 ease-in-out bg-gray-900 border border-transparent rounded-md active:bg-gray-900 false"
                         >
-                            Register
+                            Register Employee
                         </button>
-                    </div>
-
                 </form>
                 </div>
                 </div>
@@ -350,4 +338,4 @@ const SignUp = () => {
         </>
     )
 }
-export default SignUp;
+export default Manager_pages;

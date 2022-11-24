@@ -56,8 +56,7 @@ const Login = () => {
 
   
     };
-    
-
+    console.log(userdata)
     return ( 
         <div>
           <div className="bg-gray-400 h-screen overflow-hidden flex items-center justify-center">
