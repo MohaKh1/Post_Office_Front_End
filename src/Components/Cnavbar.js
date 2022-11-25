@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-
+import Customer_data from './CustomerData';
 
 const Cnavbar= (props) =>{
   return (

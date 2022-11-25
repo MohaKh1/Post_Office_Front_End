@@ -2,6 +2,9 @@ import React from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {useState, useEffect, useRef} from "react";
+import Cnavbar from "../../Components/Cnavbar";
+import Customer_data from "../../Components/CustomerData";
+import Customer from "../Customer_Pages/Customer";
 
 
 const SIGNUP_URL = '/signup';
@@ -72,8 +75,14 @@ const SignUp = () => {
             })
             .then((response) => {
                 setUserdata(response.data)
-                console.log(response)
-                console.log(userdata)
+                if (userdata.status_code === 200) {
+                    setSuccess(true);
+                    console.log(success);
+                    <Customer_data data="{userdata.data}"/>
+                }
+                else {
+                    console.log(userdata)
+                }
 
             }).catch((error) => {
                 if (error.response) {
@@ -81,14 +90,6 @@ const SignUp = () => {
                 }
             })
 
-            // console.log(response?.data);
-            // console.log(JSON.stringify(response))
-            // setSuccess(true);
-            // //clear state and controlled inputs
-            // //need value attrib on inputs for this
-            // setUsername('');
-            // setPwd('');
-            // setMatchPwd('');
         } catch (err) {
             console.log(err)
             if (!err?.response) {
@@ -106,11 +107,11 @@ const SignUp = () => {
         <>
             {success ? (
                 <section>
-                    <h1>Success!</h1>
-                    <p>
-                        add redirect
-                    </p>
-                </section>
+                
+                <p>
+                    <Customer/>
+                </p>
+            </section>
             ) : (
                 <section>
             
