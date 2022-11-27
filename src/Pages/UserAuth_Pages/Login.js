@@ -8,7 +8,7 @@ import Employee_data from "../../Components/EmployeeData";
 const Login = () => {
 
     /* write to not send if empty */
-    const [theerror,settheError]=useState();
+    const [theError,settheError]=useState("");
     const [userdata, setUserdata] = useState({"data": "NONE"})
     const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ const Login = () => {
       })
       .catch((error) => {
         if (error.response) {
-          settheError("Invaild Username or Password")
+          settheError("Invaild Username or Password");
           }
       })
       if(userdata.user_type === 0){
@@ -50,7 +50,7 @@ const Login = () => {
         <Employee_data data="{userdata.data}"/>
         navigate("/manager");
       } else{
-        
+        settheError("Invaild Username or Password");
       }
 
   
@@ -63,7 +63,7 @@ const Login = () => {
               <div className="text-center  font-medium p-2 md:p-4 text-black">
                 Post Office
               </div>
-          <form class="p-12 md:p-12">
+          <form onSubmit={HandleSubmit} className="p-12 md:p-12">
             <div className="flex items-center text-lg mb-6 md:mb-4">
               <svg className="absolute ml-3" width="24" viewBox="0 0 24 24">
                 <path d="M20.822 18.096c-3.439-.794-6.64-1.49-5.09-4.418 4.72-8.912 1.251-13.678-3.732-13.678-5.082 0-8.464 4.949-3.732 13.678 1.597 2.945-1.725 3.641-5.09 4.418-3.073.71-3.188 2.236-3.178 4.904l.004 1h23.99l.004-.969c.012-2.688-.092-4.222-3.176-4.935z"/>
@@ -77,8 +77,8 @@ const Login = () => {
               <input type="password" name="password" className="bg-gray-200 pl-12 py-2 md:py-4 focus:outline-none w-full" placeholder="Password" />
             </div>
 
-            <button onClick={HandleSubmit} className="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full">Login</button>
-            {theerror?<label>{theerror}</label>:null}
+            <button className="bg-gradient-to-b from-gray-700 to-gray-900 font-medium p-2 md:p-4 text-white uppercase w-full">Login</button>
+            {theError && (<p>{theError}</p>)}
           </form>
               <Link to="/SignUp"className="text-center block font-medium p-2 md:p-4 text-black hover:underline">Need an account?</Link>
             </div>
