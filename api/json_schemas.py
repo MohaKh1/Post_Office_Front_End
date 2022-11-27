@@ -42,9 +42,6 @@ mail_json = {
     }
 }
 
-get_mail_json ={
-    "CustomerID": "CUSTID"
-}
 
     
     
