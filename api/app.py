@@ -29,8 +29,10 @@ def pyodbc_row_to_dic(cursor, rows):
 @app.route('/test')
 def test():
     con = db_con.create_connection()
+    sql_q = sql_queries.GET_CUST_PACK
+
     db_con.destroy_connection(con)
-    return "test"
+    return "TESTING"
 
 @app.route('/')
 def index():
@@ -434,6 +436,43 @@ def get_loc():
         
         try:
             return jsn_resp.create_package_response(200, "successfully queried", data={"locations": address_final})
+        except Exception as e:
+            return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error=str(e))
+    except Exception as e:
+        return jsn_resp.employee_sign_up_response(403,"api base catch all error", raw_error=str(e))
+    
+
+
+@app.route("/get_package", methods=["POST"])
+def get_package():
+    try:
+        input_json = request.get_json()
+        if input_json == None: # no data recieved
+            return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error="no data recieved response")
+        
+
+        # We are checking if user_input json has the correct keys by cross checking against schema. 
+        if type(input_json) != type({"data": "data"}) or input_json.keys() != json_schemas.get_mail_json.keys():
+             return jsn_resp.employee_sign_up_response(403,"data format not right, use this", raw_error={"data":json_schemas.get_mail_json})
+
+        con = db_con.create_connection()
+        if con == False: # db con failed
+                return jsn_resp.employee_sign_up_response("400", "data recieved but connection to db failed")
+        cursor = con.cursor()
+        sql_get_package_address_info = sql_queries.GET_CUST_PACK
+        cursor.execute(sql_get_package_address_info.format(customer_id_one=input_json.get('CustomerID', 0)))
+        results = cursor.fetchall()
+        results_dict = {}
+        for index,result in enumerate(results):
+            results_dict[index] = jsn_resp.end_user_package_response_json(result)
+        db_con.destroy_connection(con)
+
+
+
+        
+        
+        try:
+            return jsn_resp.create_package_response(200, "successfully queried", data=results_dict)
         except Exception as e:
             return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error=str(e))
     except Exception as e:
