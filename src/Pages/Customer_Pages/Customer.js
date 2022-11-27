@@ -1,7 +1,14 @@
 import React from "react";
+import Cookies from 'universal-cookie'
 import Cnavbar from "../../Components/Cnavbar";
 const Customer = (props) => {
-    
+    const cookies = new Cookies();
+    console.log(cookies.get('data'))
+    console.log(cookies.get('data'))
+    console.log(cookies.get('data'))
+    console.log(cookies.get('data'))
+    console.log(cookies.get('data'))
+
     return ( 
         <div className="Employee">
        <Cnavbar/>

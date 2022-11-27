@@ -4,6 +4,8 @@ import axios from "axios";
 import {useState} from "react";
 import Customer_data from "../../Components/CustomerData";
 import Employee_data from "../../Components/EmployeeData";
+import Cookies from 'universal-cookie';
+
 
 const Login = () => {
 
@@ -15,6 +17,7 @@ const Login = () => {
     const [Password, setPassword] = useState('');
 
     const HandleSubmit = async e =>{
+      const cookies = new Cookies();
 
       e.preventDefault();
 
@@ -22,7 +25,6 @@ const Login = () => {
         "username" : Username,
         "password": Password
         }};
-      console.log(signInData)
        await axios.request({
         data:signInData,
         headers: {
@@ -34,15 +36,17 @@ const Login = () => {
       })
       .then((response) => {
         setUserdata(response.data)
+        cookies.set('data', userdata, {path: '/'} )
       })
       .catch((error) => {
         if (error.response) {
           settheError("Invaild Username or Password")
           }
       })
+
+
       if(userdata.user_type === 0){
         /*navigate to customer */
-        <Customer_data data="{userdata.data}"/>
         navigate("/customer");
       }else if(userdata.user_type === 1 && userdata.data.Employee_Type === 0){
         /* navigate to employee */
