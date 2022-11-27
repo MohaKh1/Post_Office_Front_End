@@ -22,7 +22,31 @@ def create_package_response_json(userinput):
     }
     return json_
 
-
+def end_user_package_response_json(userinput):
+    json_ = {
+        "TrackingNumber":userinput[0],
+        "Sender_First_Name": userinput[1],
+        "Sender_Last_Name": userinput[2],
+        "Sender_Username": userinput[3],
+        "Reciever_First_Name": userinput[4],
+        "Reciever_Last_Name": userinput[5],
+        "Reciever_Username": userinput[6],
+        "Processor_First_Name": userinput[7],
+        "Processor_Last_Name": userinput[8],
+        "Processor_Username": userinput[9],
+        "Delivery_First_Name": userinput[10],
+        "Delivery_Last_Name": userinput[11],
+        "Delivery_Username": userinput[12],
+        "Package_Status": userinput[13],
+        "Delivery_Date": userinput[14],
+        "Total_Cost": userinput[15],
+        "Mail_Start_Location": userinput[16],
+        "Mail_Current_Location": userinput[17],
+        "is_next_location_destination": userinput[18],
+        "Destination_Address": userinput[19],
+        "Delivered": userinput[20]
+    }
+    return json_
 
 def sign_up_employee_response(userinput):
     json_ = {
@@ -81,6 +105,7 @@ def create_package_response(stat_code, verbose_status, data = {}, raw_error=None
         'raw_error': raw_error
     }
     )
+
 
 
 def sign_in_auth_response(stat_code, verbose_status,auth_stat = False, data = [], user_type = -1):
