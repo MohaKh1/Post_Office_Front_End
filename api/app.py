@@ -26,6 +26,11 @@ def pyodbc_row_to_dic(cursor, rows):
 #____________________________________________________________________________________
 
 
+@app.route('/test')
+def test():
+    con = db_con.create_connection()
+    db_con.destroy_connection(con)
+    return "test"
 
 @app.route('/')
 def index():
