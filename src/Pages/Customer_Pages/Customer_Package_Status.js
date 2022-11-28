@@ -1,10 +1,9 @@
 import { useState } from "react";
 import Cnavbar from "../../Components/Cnavbar";
 import axios from "axios";
-import { useEffect } from "react";
 import Cookies from 'universal-cookie';
 
-const Customer_package_status = (props) => {
+const Customer_package_status = () => {
     const cookies = new Cookies();
     const userdata = cookies.get('data').data;
 
