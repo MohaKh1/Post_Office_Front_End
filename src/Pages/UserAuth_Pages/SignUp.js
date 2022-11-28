@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 
 const SignUp = () => {
-    const cookies = new Cookies();
 
     const userRef = useRef();
     const errRef = useRef();
@@ -86,13 +85,10 @@ const SignUp = () => {
             if (userdata.data.status_code === 200){
                 const dict = {"data": userdata.data.data.customer_record}
 
-                console.log(dict)
-                console.log(userdata.data.data)
                 
-                cookies.set('data', dict, {path: '/'})
 
 
-                navigate("/customer")
+                navigate("/")
                 
             }
             else{
