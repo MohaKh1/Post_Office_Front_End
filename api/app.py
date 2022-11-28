@@ -447,6 +447,7 @@ def get_loc():
 def get_package():
     try:
         input_json = request.get_json()
+        
         if input_json == None: # no data recieved
             return jsn_resp.employee_sign_up_response(403,"data format not right", raw_error="no data recieved response")
         
@@ -462,6 +463,7 @@ def get_package():
         sql_get_package_address_info = sql_queries.GET_CUST_PACK
         cursor.execute(sql_get_package_address_info.format(customer_id_one=input_json.get('CustomerID', 0)))
         results = cursor.fetchall()
+        print(results)
         results_dict = {}
         for index,result in enumerate(results):
             results_dict[index] = jsn_resp.end_user_package_response_json(result)

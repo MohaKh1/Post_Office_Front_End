@@ -34,9 +34,15 @@ const Cnavbar= (props) =>{
               <Link to="/customer_package_status" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                 Package Status
               </Link>
+
+              <Link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-med font-medium">
+                /logout
+              </Link>
             
             </div>
+            
           </div>
+          
         </div>
        
         <div class="-mr-2 flex md:hidden">
@@ -60,10 +66,12 @@ const Cnavbar= (props) =>{
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
+          
         </div>
       </div>
+      
     </div>
-
+    
     {/* <!-- Mobile menu, show/hide based on menu state. --> */}
     <div class="md:hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">

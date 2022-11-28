@@ -8,6 +8,8 @@ import Cookies from 'universal-cookie';
 
 
 const Login = () => {
+    const cookies = new Cookies();
+    cookies.remove('data')
 
     /* write to not send if empty */
     const [theerror,settheError]=useState();
@@ -17,7 +19,7 @@ const Login = () => {
     const [Password, setPassword] = useState('');
 
     const HandleSubmit = async e =>{
-      const cookies = new Cookies();
+      
 
       e.preventDefault();
 
@@ -46,6 +48,7 @@ const Login = () => {
 
 
       if(userdata.user_type === 0){
+
         /*navigate to customer */
         navigate("/customer");
       }else if(userdata.user_type === 1 && userdata.data.Employee_Type === 0){

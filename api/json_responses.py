@@ -25,12 +25,12 @@ def create_package_response_json(userinput):
 def end_user_package_response_json(userinput):
     json_ = {
         "TrackingNumber":userinput[0],
-        "Sender_First_Name": userinput[1],
-        "Sender_Last_Name": userinput[2],
-        "Sender_Username": userinput[3],
-        "Reciever_First_Name": userinput[4],
-        "Reciever_Last_Name": userinput[5],
-        "Reciever_Username": userinput[6],
+        "Reciever_First_Name": userinput[1],
+        "Reciever_Last_Name": userinput[2],
+        "Reciever_Username": userinput[3],
+        "Sender_First_Name": userinput[4],
+        "Sender_Last_Name": userinput[5],
+        "Sender_Username": userinput[6],
         "Processor_First_Name": userinput[7],
         "Processor_Last_Name": userinput[8],
         "Processor_Username": userinput[9],

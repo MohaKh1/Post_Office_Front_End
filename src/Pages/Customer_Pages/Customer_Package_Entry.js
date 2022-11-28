@@ -3,9 +3,12 @@ import { useState, useRef } from "react";
 import Cnavbar from "../../Components/Cnavbar";
 import axios from "axios";
 import {Link, useNavigate} from "react-router-dom";
+import Cookies from 'universal-cookie';
 
 
 const Customer_package_entry = (props) => {
+    const cookies = new Cookies();
+    const userdata = cookies.get('data').data;
     const [theerror,settheError]=useState();
 
     const [packageData,SetPackageData] = useState({"data": "None"});
@@ -15,7 +18,7 @@ const Customer_package_entry = (props) => {
     const [SpecialCare, setSpecialCare] = useState(0)
     const [postloc, setPostLoc] = useState(1336)
     const navigate = useNavigate();
-
+    const fake_res = {"data": "None"};
 
     
 
@@ -23,7 +26,7 @@ const Customer_package_entry = (props) => {
         e.preventDefault();
         const packageinput = {"data":{
             "mail": {
-                "SenderID" : 31, //change later
+                "SenderID" : userdata.CustomerID, //change later
                 "RecieverUsername": recievername,
                 "Special_Care": SpecialCare,
                 "Service_Type": serviceType,
@@ -41,29 +44,27 @@ const Customer_package_entry = (props) => {
 
         })
         .then((response) => {
-            SetPackageData(response.data)
+            fake_res.data = response.data;
             
-            console.log(packageData.status_code === 200)
-            console.log(packageData)
-
-            if (packageData.status_code === 200){
-                navigate("/customer_package_status")
-            }
-            else if (packageData.data === 'None'){
-                settheError("Please Click again")
-
-            }
-            else{
-                settheError("Package not added")
-          }
-
         }).catch((error) => {
             if (error.response) {
             alert(error.response)
             }
         })
+        console.log(fake_res)
 
-        
+        if (fake_res.data !== 'None'){
+            if (fake_res.data .status_code === 200){
+                navigate("/customer_package_status")
+            }
+            else if (fake_res.data .data === 'None'){
+                settheError("Please Click again")
+
+            }
+            else{
+                settheError("Package not added")
+            }
+        }
 
     };
     return (
