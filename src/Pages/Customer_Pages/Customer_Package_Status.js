@@ -77,7 +77,7 @@ const Customer_package_status = () => {
                                 Total Cost
                             </th>
                             <th scope="col" class="py-3 px-6">
-                                Package Status
+                                Delivered
                             </th>
                             <th scope="col" class="py-3 px-6">
                                 Expected Delivery Date

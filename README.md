@@ -1,50 +1,52 @@
-# [Full explanation of the Git/Github workflow](https://www.freecodecamp.org/news/how-to-use-git-and-github-in-a-team-like-a-pro/)
-
-Please note the 'master' branch is our production branch, we will be working on the 'development' branch. You can create your own branch off of the 'development'. When cloning please make sure your branch is set to development.
-Use:
+# Prerequisites
+## Cloning the App
+To Clone this repository run
 ```
-git checkout -t origin/development
+git clone https://github.com/MohaKh1/Post_Office_Front_End.git
 ```
 
-# [Cloning a React App](https://javascript.plainenglish.io/how-to-clone-an-app-from-github-446541a0302d)
+## Frontend
+Make sure you have [node.js and npm](https://docs.npmjs.com/cli/v7/configuring-npm/install) installed
+
+Run 
+```
+npm install
+``` 
+to install all dependencies and a *package.json* file should appear.
 
 
-# Getting Started with Create React App
+## Backend Server
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Make sure you have [Pip](https://www.makeuseof.com/tag/install-pip-for-python/) and [Python](https://www.bing.com/search?q=install+python&cvid=73a40ac4a61a49f789dd6b244d5752f7&aqs=edge.0.0l9.1955j0j9&FORM=ANAB01&PC=EDGEDSE) installed on your machine.
 
-## Running backend server
-To run the backend server, first you must move to the backend directory
+Then move into the backend directory
 
 ```cd api```
 
-Then install flask (optionally use a [venv](https://www.tutorialspoint.com/how-to-create-a-virtual-environment-in-python) to contain packages to this project)
+Then install all dependencies using pip.
 
- ```pip install flask```
+```
+pip install -r requirements.txt
+```
+
+Next place the secrets provided in the google drive **(secrets.txt)** into a **.env file** and place the file INSIDE the api folder.
  
- Then we need to [install the driver](https://learn.microsoft.com/en-us/sql/connect/python/pyodbc/step-1-configure-development-environment-for-pyodbc-python-development?source=recommendations&view=sql-server-ver16) for the database connector
+ Then we need to install the driver [Windows/Linux](https://learn.microsoft.com/en-us/sql/connect/python/pyodbc/step-1-configure-development-environment-for-pyodbc-python-development?source=recommendations&view=sql-server-ver16) | [Mac](https://going.bg/posts/pyodbc_mac/) for the database connector (pyodbc).
  
- Then once you have installed the db connector make sure you are in the right directory and run
+
+
+# Running the application
+
+## Backend
+Make sure you are in the /api directory.
+
+Then run
  
  ```FLASK_DEBUG=1 flask run```
 
-Now you can use postman or your application to test the api endpoints.
+to start the server
 
-### Current endpoints
-
-[https://www.educba.com/flask-post-request/#:~:text=Syntax%20of%20Flask%20POST%20request%201%201.%20Configure,key%3A%20...%204%204.%20Retrieve%20parameter%20from%20JSON.](Making Api Requests with Postman)
-
-```api/json_schemas.py``` to see json formats, but you must put your json similar to this. -> ex: {"data" : {"username": "<username>", "password": "<password>"}}
-```api/json_responses.py``` to see json responses.
-
--- sign in auth: app.route("/sign_in", methods=["GET"])
-
--- customer sign up: @app.route("/sign_up", methods=["POST"])
-
--- employee sign up: @app.route("/emp_sign_up", methods=["POST"])
-
-
-## Available Scripts
+## Frontend
 
 In the project directory, you can run:
 

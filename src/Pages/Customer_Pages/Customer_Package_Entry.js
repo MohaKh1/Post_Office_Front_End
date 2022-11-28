@@ -70,7 +70,7 @@ const Customer_package_entry = (props) => {
     return (
     <div>
         <Cnavbar/>
-        <div class="flex justify-center p-3 ">
+        <div class="flex justify-center p-6 ">
             <div class="flex flex-col justify-center p-6 rounded-lg shadow-2xl bg-white">
                 <div class="text-center p-2">
                     <h1 class="text-5xl font-bold mt-0 mb-6">Create a package</h1>
