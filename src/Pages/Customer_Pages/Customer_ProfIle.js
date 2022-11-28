@@ -26,23 +26,6 @@ const Customer_profile = () => {
      </div>
   </div>
 </div>
-
-
-
-
-
-
-
-            <div>
-                {userdata.Username}<br/>
-                {userdata.Phone_Number}<br/>
-                {userdata.Email}<br/>
-                {userdata.Balance}<br/>
-                {userdata.First_Name}<br/>
-                {userdata.Last_Name}<br/>
-                {userdata.Sex}<br/>
-                {userdata.Customer_Address}<br/>
-            </div>
         </div>
 
      );
