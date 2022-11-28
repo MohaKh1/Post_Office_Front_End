@@ -12,9 +12,11 @@ const Customer = (props) => {
             <div class="sm:w-2/3 lg:w-2/5 flex flex-col relative z-20">
                 <span class="w-20 h-2 bg-gray-800 dark:bg-black mb-12">
                 </span>
+                <div class="pr-8">
                 <h1 class="font-bebas-neue uppercase text-sm sm:text-8xl font-black flex flex-col leading-none dark:text-black text-gray-800">
                     Welcome, {userdata.Username}
                 </h1>
+                </div>
                 <p class="text-lg lg:text-base text-gray-700 dark:text-black">
                     Let us take care of all your post office needs.
                 </p>

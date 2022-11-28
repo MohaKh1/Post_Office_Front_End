@@ -24,6 +24,7 @@ const Customer_package_entry = (props) => {
 
     const HandleSubmit = async e =>{
         e.preventDefault();
+        console.log(userdata)
         const packageinput = {"data":{
             "mail": {
                 "SenderID" : userdata.CustomerID, //change later
@@ -51,13 +52,12 @@ const Customer_package_entry = (props) => {
             alert(error.response)
             }
         })
-        console.log(fake_res)
 
         if (fake_res.data !== 'None'){
-            if (fake_res.data .status_code === 200){
+            if (fake_res.data.status_code === 200){
                 navigate("/customer_package_status")
             }
-            else if (fake_res.data .data === 'None'){
+            else if (fake_res.data.data === 'None'){
                 settheError("Please Click again")
 
             }
